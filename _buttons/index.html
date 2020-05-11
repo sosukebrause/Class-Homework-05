@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    ​
+    <title>Document</title>
+  </head>
+  <body class="bg-dark text-dark">
+    <!-- sets up bootstrap jumbotron -->
+    <div class="jumbotron bg-primary text-light rounded-0">
+      <!-- <h1 class="text-center">jQuery and Bootstrap</h1> -->
+    </div>
+    <div id="rando" class="text-light">
+      <p>random text</p>
+    </div>​
+    <div class="alert-container">
+      <div id="alert" class="alert alert-danger">Please enter a text</div>
+      <div id="pop"></div>​
+      <!-- container to hold main content -->
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <input
+                    id="textInput"
+                    class="form-control mb-2"
+                    type="text"
+                    placeholder="add text here"
+                  />
+                  <div class="text-right">
+                    <button
+                      id="btnSubmit"
+                      class="btn btn-primary"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <!-- first dummy card -->
+          ​
+          <div id="cardContainer">
+            <div class="card mb-3">
+              <div class="card-body">
+                <p>
+                  some text
+                </p>
+                <div class="text-right">
+                  <button 
+                    data-id="1"
+                    class="btnDanger btn btn-success"
+                    style="width: 100px;"
+                  >
+                    Edit
+                  </button>
+                  <button
+                  id="btnDelete"
+                    data-id="2"
+                    class="btnDanger btn btn-danger"
+                    style="width: 100px;"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      ​
+      <!-- text container to eventually hold all data -->
+      <!-- <div id="textContainer"></div> -->
+    </div>
+
+    ​
+    <script
+      src="https://code.jquery.com/jquery-3.5.0.slim.js"
+      integrity="sha256-sCexhaKpAfuqulKjtSY7V9H7QT0TCN90H+Y5NlmqOUE="
+      crossorigin="anonymous"
+    ></script>
+    ​
+    <script src="app.js"></script>
+  </body>
+</html>
