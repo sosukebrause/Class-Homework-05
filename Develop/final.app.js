@@ -10,40 +10,38 @@ $(document).ready(function () {
   // var textArray = [];
   // textInput = "";
 
-  let startOf = moment().subtract(6, "h").endOf("hour").format("h a");
-  let endOf = moment().subtract(6, "h").endOf("day").format("h a");
+  let startOf = moment().startOf("day").add(8, "h").format("dddd, h:mm a");
   $(".container").prepend(`<h1>${startOf}</h1>`);
-  $(".container").prepend(`<h1>${endOf}</h1>`);
-
-  var form = `<form>
-      <input id="inputText" type="text" placeholder="input text here" />
-      <button id="submitbtn" type="submit">
-        Submit
-      </button>
-    </form>`;
 
   function initializeHours() {
-    let currentTime = moment().format("h");
+    let currentHour = moment().format("h a");
 
     let hours = {};
     for (i = 1; i < 12; i++) {
       hours[i] = `Event:${i}`;
-      console.log(i);
+      // console.log(i);
       var txt2 = moment()
-        .subtract(18 - i, "h")
-        .endOf("hour")
+        .startOf("day")
+        .add(9 + i, "h")
         .format("h a");
-
-      if ([i] == currentTime) {
+      console.log(i + 7);
+      if (txt2 == currentHour) {
         timeClass = "present";
-      } else if ([i] < currentTime) {
+      } else if (txt2 < currentHour) {
         timeClass = "past";
       } else {
         timeClass = "future";
       }
-      console.log([i]);
+      // console.log([i]);
+      var form = `${txt2}<div class="input-group">
+  <input type="text" class="form-control" placeholder="input text" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+  <div class="input-group-append" id="button-addon4">
+    <button class="btn btn-outline-secondary" type="button">Button</button>
+    <button class="btn btn-outline-secondary" type="button">Button</button>
+  </div>
+</div>`;
       $(".timeblock").append(`<div class="${timeClass}">
-<h3>${txt2} ${form}</h3>
+<h3 id = "${txt2}"> ${form}</h3>
 </div>`);
     }
     return hours;
@@ -52,7 +50,7 @@ $(document).ready(function () {
   // var dayObects = initializeHours();
 
   // function timeClassify(dayObects) {
-  let currentTime = moment().format("h");
+  // let currentTime = moment().format("h");
 
   //   let hours = dayObects;
   //   if (hours == currentTime) {
