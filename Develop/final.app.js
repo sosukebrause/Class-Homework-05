@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+  $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h a"));
   // var currentTime = moment().format("h:mm:ss a");
   // $("#time").text(`${currentTime}`);
   // var textArray = [];
@@ -10,8 +10,8 @@ $(document).ready(function () {
   setInterval(updateTime, 1000);
   // textInput = "";
 
-  let startOf = moment().startOf("day").add(8, "h").format("dddd, h:mm a");
-  $(".container").prepend(`<h1>${startOf}</h1>`);
+  // let startOf = moment().startOf("day").add(8, "h").format("dddd, h:mm a");
+  // $(".container").prepend(`<h1>${startOf}</h1>`);
 
   function initializeHours() {
     let currentHour = moment().format("h a");
@@ -40,25 +40,27 @@ $(document).ready(function () {
       if (taskEvent !== null) {
         task = taskEvent.task;
       }
-      var form = `${txt2}<div class="input-group">
-  <textarea id = "input${i}" type="text" class="form-control" placeholder="input text"></textarea>
-  <div class="input-group-append" id="button-addon4">
-      <button id = "btnSave${i}" data-id="${i}" class="btn btn-outline-secondary btn-save" type="button">Save</button>
-    <button id = "btnDelete${i}" data-id="${i}" style =  "font-size: 8pt;" class="btn btn-outline-secondary btn-delete" type="button">Delete</button>
+      var form = `${txt2}
+      <div class="input-group">
+      <textarea id = "input${i}" type="text" class="textarea form-control" placeholder="input text"></textarea>
+      <div class="input-group-append" id="button-addon4">
+      <button id = "btnDelete${i}" data-id="${i}" class="btn-danger btn-delete" type="button">Clear</button>
+      <button id = "btnSave${i}" data-id="${i}" class="saveBtn btn-success btn-save" type="button">Save</button>
 
   </div>
 </div>
-<p id="task${i}">${task}</p>`;
-      $(".timeblock").append(`<div class="${timeClass}">
-<h3 id = "${txt2}"> </h3>
+`;
+      $(".timeblock")
+        .append(`<div style="margin-top: 20px;" class="${timeClass}">
+<h3 id = "${txt2}"></h3>
 ${form}
-</div>`);
+</div> <br>
+<div class="description;" id="task${i}">${task}</div>
+`);
     }
     return hours;
   }
   initializeHours();
-  //console.log(i);
-  //am not sure how to use the return function for either the hours object or the  `i`, what to console log it or how to bracket them for reuse...
 
   $(document).on("click", ".btn-save", function (e) {
     e.preventDefault();
@@ -67,12 +69,15 @@ ${form}
 
     //$(this).attr("style", "display: none;");
     var userText = $(`#input${id}`).val();
-    // console.log(userText);
+    console.log(userText);
     // console.log($("#input1").val("Event"));
     // console.log(typeof userText); //this returns string//
     //  localStorage.setItem("Data", "setting item for data1");
     localStorage.setItem(`Event${id}`, JSON.stringify({ task: userText }));
-    $(`#task${id}`).text(userText);
+    g = document.createElement("li");
+    g.setAttribute("id", `task${id}`);
+    $(`#task${id}`).append(g);
+    g.append(userText);
   });
 
   $(document).on("click", ".btn-delete", function (e) {
@@ -81,29 +86,13 @@ ${form}
     window.localStorage.removeItem(`Event${id}`);
     $(`#task${id}`).text("");
   });
-  // $("#btnDelete1").on("click", function () {
-  //   window.localStorage.removeItem("Event");
-  //   $(`#task1`).text("");
-  // });
+  //REFRESH FUNCTION
+  $(document).on("click", ".btn-save", function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    $(`#input${id}`).val("");
+  });
 
-  // $("#btnSave1").on("click", function () {
-  //   renderData();
-  // });
-
-  function renderData() {
-    var item = JSON.parse(localStorage.getItem("Event"));
-    console.log(item.task);
-
-    if (item != null) {
-      $("#task1").text(item.task);
-    }
-    refresh();
-  }
-  function refresh() {
-    $("#input1").val("");
-  }
-
-  function Delete() {}
   //am not sure how to use the return function for either the hours object or the  `i`, what to console log it or how to bracket them for reuse...
 
   // function renderData() {

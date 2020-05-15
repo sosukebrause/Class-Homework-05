@@ -23,3 +23,20 @@ function initiateInputs() {
   }
 }
 initiateInputs();
+
+initializeTask();
+
+function initializeTask() {
+  for (i = 1; i < 12; i++) {
+    $(`#btnSave${i}`).on("click", function () {
+      var userText = $(`#input${i}`).val();
+      console.log(userText);
+      // console.log($("#input1").val("Event"));
+      // console.log(typeof userText);      //this returns string//
+      localStorage.setItem(`event${i}`, JSON.stringify({ task: userText }));
+      // renderData();
+      // refresh();
+      // $("#input1").val();
+    });
+  }
+}
